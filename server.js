@@ -77,18 +77,26 @@ app.delete("/api/department/:id", (req, res) => {
 // Create a department
 
 app.post("/api/department", ({ body }, res) => {
-  const errors = inputCheck(
-    body,
-    "IT Department",
-  );
+  const errors = inputCheck(body, "name");
   if (errors) {
     res.status(400).json({ error: errors });
     return;
   }
-});
+  const sql = `INSERT INTO department (name)
+  VALUES (?)`;
+  const params = [body.name];
 
-//
-//
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: body,
+    });
+  });
+});
 //
 //
 // routes the "app.get" route must run before the "app.use" for it to work
