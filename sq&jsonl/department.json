@@ -1,0 +1,30 @@
+[
+	{
+		"id" : 1,
+		"name" : "Customer Service"
+	},
+	{
+		"id" : 2,
+		"name" : "Billing"
+	},
+	{
+		"id" : 3,
+		"name" : "Account Receivable"
+	},
+	{
+		"id" : 4,
+		"name" : "Payroll"
+	},
+	{
+		"id" : 5,
+		"name" : "Music Department"
+	},
+	{
+		"id" : 6,
+		"name" : "Engineering"
+	},
+	{
+		"id" : 7,
+		"name" : "Public Health"
+	}
+]

@@ -25,7 +25,7 @@ app.get("/api/department", (req, res) => {
   });
 });
 // Delete a department
-app.delete('/api/department/:id', (req, res) => {
+app.delete("/api/department/:id", (req, res) => {
   const sql = `DELETE FROM department WHERE id = ?`;
   const params = [req.params.id];
 
@@ -34,13 +34,13 @@ app.delete('/api/department/:id', (req, res) => {
       res.statusMessage(400).json({ error: res.message });
     } else if (!result.affectedRows) {
       res.json({
-        message: 'department not found'
+        message: "department not found",
       });
     } else {
       res.json({
-        message: 'deleted',
+        message: "deleted",
         changes: result.affectedRows,
-        id: req.params.id
+        id: req.params.id,
       });
     }
   });

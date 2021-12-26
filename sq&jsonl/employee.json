@@ -1,0 +1,44 @@
+[
+	{
+		"id" : 1,
+		"first_name" : "Derrick",
+		"last_name" : "Pierre-Louis",
+		"role_id" : 1,
+		"manage_id" : 1
+	},
+	{
+		"id" : 2,
+		"first_name" : "Peter",
+		"last_name" : "Samuels",
+		"role_id" : 2,
+		"manage_id" : 2
+	},
+	{
+		"id" : 3,
+		"first_name" : "Marjory",
+		"last_name" : "Gribbs",
+		"role_id" : 4,
+		"manage_id" : 3
+	},
+	{
+		"id" : 4,
+		"first_name" : "Daniels",
+		"last_name" : "Erikcson",
+		"role_id" : 5,
+		"manage_id" : 4
+	},
+	{
+		"id" : 5,
+		"first_name" : "Tom",
+		"last_name" : "Smith",
+		"role_id" : 3,
+		"manage_id" : 5
+	},
+	{
+		"id" : 6,
+		"first_name" : "Johnson",
+		"last_name" : "Kramp",
+		"role_id" : 6,
+		"manage_id" : 6
+	}
+]
