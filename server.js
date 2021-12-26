@@ -148,7 +148,7 @@ app.post("/api/role", ({ body }, res) => {
     res.status(400).json({ error: errors });
     return;
   }
-  const sql = `INSERT INTO department (title, salary, department_id)
+  const sql = `INSERT INTO role (title, salary, department_id)
   VALUES (?,?,?)`;
   const params = [body.title, body.salary, body.department_id];
 
@@ -178,7 +178,7 @@ app.get("/api/employee", (req, res) => {
     });
   });
 });
-// Get a single employee by ID
+// get employee by ID
 app.get("/api/employee/:id", (req, res) => {
   const sql = `SELECT * FROM employee WHERE id = ?`;
   const params = [req.params.id];
@@ -195,7 +195,7 @@ app.get("/api/employee/:id", (req, res) => {
   });
 });
 
-// Delete a emloyee
+// Delete an employee
 app.delete("/api/employee/:id", (req, res) => {
   const sql = `DELETE FROM employee WHERE id = ?`;
   const params = [req.params.id];
@@ -216,7 +216,7 @@ app.delete("/api/employee/:id", (req, res) => {
     }
   });
 });
-// Create an employee
+// Create a role
 app.post("/api/employee", ({ body }, res) => {
   const errors = inputCheck(
     body,
@@ -229,7 +229,7 @@ app.post("/api/employee", ({ body }, res) => {
     res.status(400).json({ error: errors });
     return;
   }
-  const sql = `INSERT INTO department (fist_name, last_name, ,role_id, manager_id)
+  const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
   VALUES (?,?,?,?)`;
   const params = [body.first_name, body.last_name, body.role_id, manager_id];
 
@@ -244,7 +244,7 @@ app.post("/api/employee", ({ body }, res) => {
     });
   });
 });
-// routes the "app.get" route must run before the "app.use" for it to work
+
 // Default response for any other request (Not Found)
 app.use((req, res) => {
   res.status(404).end();
