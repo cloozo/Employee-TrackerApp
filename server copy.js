@@ -86,45 +86,28 @@ app.delete("/api/role/:id", (req, res) => {
     }
   });
 });
-
 //Update a Role
-app.put("/role/:id", (req, res) => {
-  // Data validation
-  const errors = inputCheck(req.body, "title", "salary", "department_id");
-  if (errors) {
-    res.status(400).json({ error: errors });
-    return;
-  }
-
-  const sql = `UPDATE role SET title,salary,department_id = ?,?,? WHERE id = ?`;
-  const params = [
-    req.body.title,
-    req.body.salary,
-    req.body.department_id,
-    req.params.id,
-  ];
-
+app.put("/api/role/:id", (req, res) => {
+  const sql = `UPDATE role SET department_id = ? 
+               WHERE id = ?`;
+  const params = [req.body.department_id, req.params.id];
   db.query(sql, params, (err, result) => {
     if (err) {
       res.status(400).json({ error: err.message });
+      // check if a record was found
     } else if (!result.affectedRows) {
       res.json({
-        message: "Role not found",
+        message: "role not found",
       });
     } else {
       res.json({
-        message: "success",
+        message: "record updated successfully!",
         data: req.body,
         changes: result.affectedRows,
       });
     }
   });
 });
-//
-//
-//
-//
-//
 //
 //
 

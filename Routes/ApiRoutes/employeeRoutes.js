@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../db/connection");
-// const inputCheck = require("../../utils/inputCheck");
+const inputCheck = require("../../utils/inputCheck");
 
-//GET ALL EMPLOYEES FROM HERE
+//GET ALL employeeS FROM HERE
 router.get("/employee", (req, res) => {
   const sql = `SELECT * FROM employee`;
   db.query(sql, (err, rows) => {
@@ -17,7 +17,7 @@ router.get("/employee", (req, res) => {
     });
   });
 });
-// get employee by ID
+// Get a single employee by ID
 router.get("/employee/:id", (req, res) => {
   const sql = `SELECT * FROM employee WHERE id = ?`;
   const params = [req.params.id];
@@ -34,7 +34,7 @@ router.get("/employee/:id", (req, res) => {
   });
 });
 
-// Delete an employee
+// Delete a employee by ID
 router.delete("/employee/:id", (req, res) => {
   const sql = `DELETE FROM employee WHERE id = ?`;
   const params = [req.params.id];
@@ -55,7 +55,37 @@ router.delete("/employee/:id", (req, res) => {
     }
   });
 });
-// Create a role
+//
+//Update a employee
+router.put("/employee/:id", (req, res) => {
+  const sql = `UPDATE employee SET first_name = ?, last_name = ?, role_id= ?, manager_id = ?
+               WHERE id = ?`;
+  const params = [
+    req.body.first_name,
+    req.body.last_name,
+    req.body.role_id,
+    req.body.manager_id,
+    req.params.id,
+  ];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      // check if a record was found
+    } else if (!result.affectedRows) {
+      res.json({
+        message: "employee not found",
+      });
+    } else {
+      res.json({
+        message: "record updated successfully!",
+        data: req.body,
+        changes: result.affectedRows,
+      });
+    }
+  });
+});
+//
+// Create a employee
 router.post("/employee", ({ body }, res) => {
   const errors = inputCheck(
     body,
@@ -70,7 +100,12 @@ router.post("/employee", ({ body }, res) => {
   }
   const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
   VALUES (?,?,?,?)`;
-  const params = [body.first_name, body.last_name, body.role_id, manager_id];
+  const params = [
+    body.first_name,
+    body.last_name,
+    body.role_id,
+    body.manager_id,
+  ];
 
   db.query(sql, params, (err, result) => {
     if (err) {
@@ -83,5 +118,7 @@ router.post("/employee", ({ body }, res) => {
     });
   });
 });
+
+//
 
 module.exports = router;
